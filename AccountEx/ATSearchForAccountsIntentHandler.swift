@@ -14,12 +14,16 @@ class ATSearchForAccountsIntentHandler: NSObject, INSearchForAccountsIntentHandl
     let accounts = BankAccount.allAccounts()
     
     func resolveAccountNickname(for intent: INSearchForAccountsIntent, with completion: @escaping (INSpeakableStringResolutionResult) -> Void) {
-        
+
         var nickFound = false
         var result: INSpeakableStringResolutionResult
         var matchedNick = [INSpeakableString]()
-        
-        print("\(String(describing: intent.accountNickname))")
+        for account in accounts {
+            matchedNick.append(account.nickname!)
+        }
+
+        print("Intent Nickname: \(String(describing: intent.accountNickname))")
+        print(intent)
         if let accountNickname = intent.accountNickname?.spokenPhrase
         {
             for account in accounts
@@ -30,25 +34,45 @@ class ATSearchForAccountsIntentHandler: NSObject, INSearchForAccountsIntentHandl
                     break
                 }
             }
-            
+
             if nickFound
             {
                 result = INSpeakableStringResolutionResult.success(with: intent.accountNickname!)
             }
             else
             {
-                for account in accounts
-                {
-                    matchedNick.append(account.nickname!)
-                }
                 result = INSpeakableStringResolutionResult.disambiguation(with: matchedNick)
             }
         }
+            
+                
+        else if let orgName = intent.organizationName?.spokenPhrase
+        {
+            var matchedAcct: INSpeakableString?
+            for account in accounts
+            {
+                if orgName == account.organizationName?.spokenPhrase
+                {
+                    nickFound = true
+                    matchedAcct = account.nickname!
+                    break
+                }
+            }
+            if nickFound
+            {
+                result = INSpeakableStringResolutionResult.success(with: matchedAcct!)
+            }
+            else
+            {
+                result = INSpeakableStringResolutionResult.disambiguation(with: matchedNick)
+            }
+        }
+            
         else
         {
             var matchedNickwithType = [INSpeakableString]()
             var matchedAccount = [INPaymentAccount]()
-            
+
             let accountType = intent.accountType
             for account in accounts {
                 print("Checking accountType")
@@ -56,12 +80,12 @@ class ATSearchForAccountsIntentHandler: NSObject, INSearchForAccountsIntentHandl
                     matchedAccount.append(account)
                 }
             }
-            
+
             for account in matchedAccount
             {
                 matchedNickwithType.append(account.nickname!)
             }
-            
+
             switch matchedNickwithType.count {
             case 1...Int.max:
                 result = INSpeakableStringResolutionResult.disambiguation(with: matchedNickwithType)
@@ -76,12 +100,15 @@ class ATSearchForAccountsIntentHandler: NSObject, INSearchForAccountsIntentHandl
     
     func handle(intent: INSearchForAccountsIntent, completion: @escaping (INSearchForAccountsIntentResponse) -> Void) {
         
+        print(intent)
+        
         if let accountNickname = intent.accountNickname {
             let response = INSearchForAccountsIntentResponse(code: .success, userActivity: nil)
             var matchedNick = [INPaymentAccount]()
+            print("Handled Nickname: \(accountNickname)")
             
             for account in accounts {
-                if accountNickname.spokenPhrase == account.nickname?.spokenPhrase.lowercased()
+                if accountNickname.spokenPhrase.lowercased() == account.nickname?.spokenPhrase.lowercased()
                 {
                     matchedNick.append(account)
                 }
@@ -90,6 +117,20 @@ class ATSearchForAccountsIntentHandler: NSObject, INSearchForAccountsIntentHandl
             response.accounts = matchedNick
             completion(response)
         }
+        else if let orgName = intent.organizationName {
+            let response = INSearchForAccountsIntentResponse(code: .success, userActivity: nil)
+            var matchedNick = [INPaymentAccount]()
+            
+            for account in accounts {
+                if orgName.spokenPhrase == account.organizationName?.spokenPhrase
+                {
+                    matchedNick.append(account)
+                }
+            }
+            response.accounts = matchedNick
+            completion(response)
+        }
+            
         else
         {
             let response = INSearchForAccountsIntentResponse(code: .failureRequiringAppLaunch, userActivity: nil)
@@ -97,3 +138,67 @@ class ATSearchForAccountsIntentHandler: NSObject, INSearchForAccountsIntentHandl
         }
     }
 }
+
+
+//    func resolveOrganizationName(for intent: INSearchForAccountsIntent, with completion: @escaping (INSpeakableStringResolutionResult) -> Void) {
+//
+//        var orgFound = false
+//        var result: INSpeakableStringResolutionResult
+//        var matchedAcct: INSpeakableString?
+//        var matchedOrg = [INSpeakableString]()
+//        for account in accounts {
+//            matchedOrg.append(account.nickname!)
+//        }
+//
+//        print("\(String(describing: intent.organizationName))")
+//        print("\(String(describing: intent.organizationName))")
+//        print(intent)
+//        if let orgName = intent.organizationName?.spokenPhrase
+//        {
+//            for account in accounts
+//            {
+//                if orgName == account.organizationName?.spokenPhrase
+//                {
+//                    orgFound = true
+//                    matchedAcct = account.nickname!
+//                    break
+//                }
+//            }
+//            if orgFound
+//            {
+//                result = INSpeakableStringResolutionResult.success(with: matchedAcct!)
+//            }
+//            else
+//            {
+//                result = INSpeakableStringResolutionResult.disambiguation(with: matchedOrg)
+//            }
+//        }
+//        else
+//        {
+//            var matchedOrgwithType = [INSpeakableString]()
+//            var matchedAccount = [INPaymentAccount]()
+//
+//            let accountType = intent.accountType
+//            for account in accounts {
+//                print("Checking accountType")
+//                if accountType == account.accountType {
+//                    matchedAccount.append(account)
+//                }
+//            }
+//
+//            for account in matchedAccount
+//            {
+//                matchedOrgwithType.append(account.nickname!)
+//            }
+//
+//            switch matchedOrgwithType.count {
+//            case 1...Int.max:
+//                result = INSpeakableStringResolutionResult.disambiguation(with: matchedOrgwithType)
+//            case 0:
+//                result = INSpeakableStringResolutionResult.disambiguation(with: matchedOrg)
+//            default:
+//                return
+//            }
+//        }
+//        completion(result)
+//    }

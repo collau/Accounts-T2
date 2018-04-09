@@ -23,13 +23,23 @@ class ViewController: UIViewController {
                 print("Unauthorized")
             }
         }
+        
+        let accountNames: NSOrderedSet = ["BNM 123", "Standard"]
+        INVocabulary.shared().setVocabularyStrings(accountNames, of: .paymentsAccountNickname)
+        
+//        registerVocabulary()
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+}
 
-
+func registerVocabulary() {
+    let accountNames: NSOrderedSet = ["BNM 123", "Standard Account"]
+    INVocabulary.shared().setVocabularyStrings(accountNames, of: .paymentsAccountNickname)
 }
 

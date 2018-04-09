@@ -20,6 +20,7 @@
 		334BAEAE207B11AE0029E9E2 /* AccountEx.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 334BAE95207B11AE0029E9E2 /* AccountEx.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		334BAEB7207B123D0029E9E2 /* ATSearchForAccountsIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334BAEB6207B123D0029E9E2 /* ATSearchForAccountsIntentHandler.swift */; };
 		334BAEB9207B124A0029E9E2 /* BankAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334BAEB8207B124A0029E9E2 /* BankAccount.swift */; };
+		334BAEBE207B3F9E0029E9E2 /* AppIntentVocabulary.plist in Resources */ = {isa = PBXBuildFile; fileRef = 334BAEBC207B3F9E0029E9E2 /* AppIntentVocabulary.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		334BAEA8207B11AE0029E9E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		334BAEB6207B123D0029E9E2 /* ATSearchForAccountsIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATSearchForAccountsIntentHandler.swift; sourceTree = "<group>"; };
 		334BAEB8207B124A0029E9E2 /* BankAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccount.swift; sourceTree = "<group>"; };
+		334BAEBD207B3F9E0029E9E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = "Accounts T2/Base.lproj/AppIntentVocabulary.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 		334BAE72207B110A0029E9E2 = {
 			isa = PBXGroup;
 			children = (
+				334BAEBC207B3F9E0029E9E2 /* AppIntentVocabulary.plist */,
 				334BAE7D207B110A0029E9E2 /* Accounts T2 */,
 				334BAE96207B11AE0029E9E2 /* AccountEx */,
 				334BAEA2207B11AE0029E9E2 /* AccountExUI */,
@@ -286,6 +289,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				334BAEBE207B3F9E0029E9E2 /* AppIntentVocabulary.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,6 +369,14 @@
 				334BAEA6207B11AE0029E9E2 /* Base */,
 			);
 			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+		334BAEBC207B3F9E0029E9E2 /* AppIntentVocabulary.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				334BAEBD207B3F9E0029E9E2 /* Base */,
+			);
+			name = AppIntentVocabulary.plist;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
