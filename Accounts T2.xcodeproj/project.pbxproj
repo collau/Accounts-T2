@@ -20,7 +20,7 @@
 		334BAEAE207B11AE0029E9E2 /* AccountEx.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 334BAE95207B11AE0029E9E2 /* AccountEx.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		334BAEB7207B123D0029E9E2 /* ATSearchForAccountsIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334BAEB6207B123D0029E9E2 /* ATSearchForAccountsIntentHandler.swift */; };
 		334BAEB9207B124A0029E9E2 /* BankAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334BAEB8207B124A0029E9E2 /* BankAccount.swift */; };
-		334BAEBE207B3F9E0029E9E2 /* AppIntentVocabulary.plist in Resources */ = {isa = PBXBuildFile; fileRef = 334BAEBC207B3F9E0029E9E2 /* AppIntentVocabulary.plist */; };
+		33AACFEE207C942A005D0FC0 /* AppIntentVocabulary.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33AACFEC207C942A005D0FC0 /* AppIntentVocabulary.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,7 +74,7 @@
 		334BAEA8207B11AE0029E9E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		334BAEB6207B123D0029E9E2 /* ATSearchForAccountsIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATSearchForAccountsIntentHandler.swift; sourceTree = "<group>"; };
 		334BAEB8207B124A0029E9E2 /* BankAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccount.swift; sourceTree = "<group>"; };
-		334BAEBD207B3F9E0029E9E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = "Accounts T2/Base.lproj/AppIntentVocabulary.plist"; sourceTree = "<group>"; };
+		33AACFED207C942A005D0FC0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = "Accounts T2/Base.lproj/AppIntentVocabulary.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,7 +106,7 @@
 		334BAE72207B110A0029E9E2 = {
 			isa = PBXGroup;
 			children = (
-				334BAEBC207B3F9E0029E9E2 /* AppIntentVocabulary.plist */,
+				33AACFEC207C942A005D0FC0 /* AppIntentVocabulary.plist */,
 				334BAE7D207B110A0029E9E2 /* Accounts T2 */,
 				334BAE96207B11AE0029E9E2 /* AccountEx */,
 				334BAEA2207B11AE0029E9E2 /* AccountExUI */,
@@ -281,6 +281,7 @@
 			files = (
 				334BAE89207B110A0029E9E2 /* LaunchScreen.storyboard in Resources */,
 				334BAE86207B110A0029E9E2 /* Assets.xcassets in Resources */,
+				33AACFEE207C942A005D0FC0 /* AppIntentVocabulary.plist in Resources */,
 				334BAE84207B110A0029E9E2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -289,7 +290,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				334BAEBE207B3F9E0029E9E2 /* AppIntentVocabulary.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,10 +371,10 @@
 			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
-		334BAEBC207B3F9E0029E9E2 /* AppIntentVocabulary.plist */ = {
+		33AACFEC207C942A005D0FC0 /* AppIntentVocabulary.plist */ = {
 			isa = PBXVariantGroup;
 			children = (
-				334BAEBD207B3F9E0029E9E2 /* Base */,
+				33AACFED207C942A005D0FC0 /* Base */,
 			);
 			name = AppIntentVocabulary.plist;
 			sourceTree = "<group>";
@@ -390,6 +390,7 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_CODE_COVERAGE = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
@@ -414,6 +415,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -436,6 +438,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -447,6 +450,7 @@
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_CODE_COVERAGE = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
@@ -471,6 +475,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -486,6 +491,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;
 		};
@@ -497,6 +503,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Accounts T2/Accounts T2.entitlements";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = R6XJ7CEMCJ;
+				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Accounts T2/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dzhi.dev.Accounts-T2";
@@ -505,6 +512,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "DZHI Dev Wildcard";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -516,6 +524,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Accounts T2/Accounts T2.entitlements";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = R6XJ7CEMCJ;
+				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "Accounts T2/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.dzhi.dev.Accounts-T2";
@@ -524,6 +533,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "DZHI Dev Wildcard";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;
 		};
@@ -560,6 +570,7 @@
 		334BAEB3207B11AE0029E9E2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_CODE_COVERAGE = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R6XJ7CEMCJ;
 				INFOPLIST_FILE = AccountEx/Info.plist;
@@ -575,6 +586,7 @@
 		334BAEB4207B11AE0029E9E2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_CODE_COVERAGE = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R6XJ7CEMCJ;
 				INFOPLIST_FILE = AccountEx/Info.plist;

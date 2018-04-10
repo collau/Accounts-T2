@@ -24,11 +24,13 @@ class ATSearchForAccountsIntentHandler: NSObject, INSearchForAccountsIntentHandl
 
         print("Intent Nickname: \(String(describing: intent.accountNickname))")
         print(intent)
-        if let accountNickname = intent.accountNickname?.spokenPhrase
+        if let accountNickname = intent.accountNickname
         {
+            print("\(accountNickname)")
             for account in accounts
             {
-                if accountNickname == (account.nickname?.spokenPhrase.lowercased())
+                print("\(account.nickname!)")
+                if accountNickname.spokenPhrase.lowercased() == account.nickname?.spokenPhrase.lowercased()
                 {
                     nickFound = true
                     break
@@ -46,27 +48,27 @@ class ATSearchForAccountsIntentHandler: NSObject, INSearchForAccountsIntentHandl
         }
             
                 
-        else if let orgName = intent.organizationName?.spokenPhrase
-        {
-            var matchedAcct: INSpeakableString?
-            for account in accounts
-            {
-                if orgName == account.organizationName?.spokenPhrase
-                {
-                    nickFound = true
-                    matchedAcct = account.nickname!
-                    break
-                }
-            }
-            if nickFound
-            {
-                result = INSpeakableStringResolutionResult.success(with: matchedAcct!)
-            }
-            else
-            {
-                result = INSpeakableStringResolutionResult.disambiguation(with: matchedNick)
-            }
-        }
+//        else if let orgName = intent.organizationName?.spokenPhrase
+//        {
+//            var matchedAcct: INSpeakableString?
+//            for account in accounts
+//            {
+//                if orgName == account.organizationName?.spokenPhrase
+//                {
+//                    nickFound = true
+//                    matchedAcct = account.nickname!
+//                    break
+//                }
+//            }
+//            if nickFound
+//            {
+//                result = INSpeakableStringResolutionResult.success(with: matchedAcct!)
+//            }
+//            else
+//            {
+//                result = INSpeakableStringResolutionResult.disambiguation(with: matchedNick)
+//            }
+//        }
             
         else
         {
@@ -117,19 +119,19 @@ class ATSearchForAccountsIntentHandler: NSObject, INSearchForAccountsIntentHandl
             response.accounts = matchedNick
             completion(response)
         }
-        else if let orgName = intent.organizationName {
-            let response = INSearchForAccountsIntentResponse(code: .success, userActivity: nil)
-            var matchedNick = [INPaymentAccount]()
-            
-            for account in accounts {
-                if orgName.spokenPhrase == account.organizationName?.spokenPhrase
-                {
-                    matchedNick.append(account)
-                }
-            }
-            response.accounts = matchedNick
-            completion(response)
-        }
+//        else if let orgName = intent.organizationName {
+//            let response = INSearchForAccountsIntentResponse(code: .success, userActivity: nil)
+//            var matchedNick = [INPaymentAccount]()
+//
+//            for account in accounts {
+//                if orgName.spokenPhrase == account.organizationName?.spokenPhrase
+//                {
+//                    matchedNick.append(account)
+//                }
+//            }
+//            response.accounts = matchedNick
+//            completion(response)
+//        }
             
         else
         {

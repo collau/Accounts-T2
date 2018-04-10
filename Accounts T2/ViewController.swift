@@ -27,7 +27,7 @@ class ViewController: UIViewController {
         
         let accounts = allAccounts()
         let accountNames = accounts.map { $0.nickname! }
-        INVocabulary.shared().setVocabularyStrings(NSOrderedSet(array: accountNames), of: .paymentsAccountNickname)
+        INVocabulary.shared().setVocabulary(NSOrderedSet(array: accountNames), of: .paymentsAccountNickname)
         
         
     }
@@ -39,10 +39,10 @@ class ViewController: UIViewController {
     
     public func allAccounts() -> [INPaymentAccount] {
         return [
-            INPaymentAccount(nickname: INSpeakableString(spokenPhrase: "Green Account"), number: "******789", accountType: .saving, organizationName: INSpeakableString(spokenPhrase: "AYZ"), balance: INBalanceAmount(amount: 4893.93, currencyCode: "USD"),secondaryBalance: nil),
-            INPaymentAccount(nickname: INSpeakableString(spokenPhrase: "JKK Investment"), number: "******321", accountType: .investment, organizationName: INSpeakableString(spokenPhrase: "JKK"), balance: INBalanceAmount(amount: 1111.93, currencyCode: "GBP"),secondaryBalance: nil),
-            INPaymentAccount(nickname: INSpeakableString(vocabularyIdentifier: "BNM Card", spokenPhrase: "BNM Card", pronunciationHint: "BNM Card"), number: "******482", accountType: .debit, organizationName: INSpeakableString(spokenPhrase: "BNM"), balance: INBalanceAmount(amount: 88123.93, currencyCode: "KRW"),secondaryBalance: nil),
-            INPaymentAccount(nickname: INSpeakableString(vocabularyIdentifier: "Orange 2", spokenPhrase: "Orange 2", pronunciationHint: "Orange 2"), number: nil, accountType: .debit, organizationName: INSpeakableString(spokenPhrase: "TZ"), balance: INBalanceAmount(amount: 1234.56, currencyCode: "SGD"),secondaryBalance: INBalanceAmount(amount: 2974, balanceType: .miles))
+            INPaymentAccount(nickname: INSpeakableString(vocabularyIdentifier: "Frankie", spokenPhrase: "Frankie", pronunciationHint: "Frankie"), number: "******789", accountType: .saving, organizationName: INSpeakableString(spokenPhrase: "AYZ"), balance: INBalanceAmount(amount: 4893.93, currencyCode: "USD"),secondaryBalance: nil),
+            INPaymentAccount(nickname: INSpeakableString(vocabularyIdentifier: "JKK Investment", spokenPhrase: "JKK Investment", pronunciationHint: "jay kay kay investment"), number: "******321", accountType: .investment, organizationName: INSpeakableString(spokenPhrase: "AYZ"), balance: INBalanceAmount(amount: 1111.93, currencyCode: "GBP"),secondaryBalance: nil),
+            INPaymentAccount(nickname: INSpeakableString(vocabularyIdentifier: "BNM Everyday", spokenPhrase: "BNM Everyday", pronunciationHint: "bee an am everyday"), number: "******482", accountType: .debit, organizationName: INSpeakableString(spokenPhrase: "AYZ"), balance: INBalanceAmount(amount: 88123.93, currencyCode: "KRW"),secondaryBalance: nil),
+            INPaymentAccount(nickname: INSpeakableString(vocabularyIdentifier: "Bobbie", spokenPhrase: "Bobbie", pronunciationHint: "Bobbie"), number: nil, accountType: .debit, organizationName: INSpeakableString(spokenPhrase: "AYZ"), balance: INBalanceAmount(amount: 1234.56, currencyCode: "SGD"),secondaryBalance: INBalanceAmount(amount: 2974, balanceType: .miles))
         ]
     }
     
@@ -50,6 +50,7 @@ class ViewController: UIViewController {
     public func registerVocabulary() {
         let accounts = allAccounts()
         let accountNames = accounts.map { $0.nickname! }
+        print("\(accountNames)")
         INVocabulary.shared().setVocabularyStrings(NSOrderedSet(array: accountNames), of: .paymentsAccountNickname)
     }
 }

@@ -2,33 +2,22 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>ParameterVocabularies</key>
+	<key>IntentPhrases</key>
 	<array>
 		<dict>
-			<key>ParameterNames</key>
+			<key>IntentName</key>
+			<string>INSearchForAccountsIntent</string>
+			<key>IntentExamples</key>
 			<array>
-				<string>INSearchForAccountsIntent.accountNickname</string>
-			</array>
-			<key>ParameterVocabulary</key>
-			<array>
-				<dict>
-					<key>VocabularyItemIdentifier</key>
-					<string>Jurassic</string>
-					<key>VocabularyItemSynonyms</key>
-					<array>
-						<dict>
-							<key>VocabularyItemPhrase</key>
-							<string>Jurassic</string>
-							<key>VocabularyItemExamples</key>
-							<array>
-								<string>check the balance for Jurassic account</string>
-								<string>check the balance of Jurassic account</string>
-								<string>check Jurassic account&apos;s balance</string>
-								<string>check Jurassic account</string>
-							</array>
-						</dict>
-					</array>
-				</dict>
+				<string>Check my bank account</string>
+				<string>Check my debit account</string>
+				<string>Check bank account</string>
+				<string>What is the balance of BNM Card account</string>
+				<string>What is the balance of my Bobbie account</string>
+				<string>What is the balance in Green account</string>
+				<string>What is the balance in my BNM Everyday account</string>
+				<string>How much do I have in my bank account</string>
+				<string>How much do I have in my Bobbie account</string>
 			</array>
 		</dict>
 	</array>
