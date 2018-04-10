@@ -21,6 +21,7 @@
 		334BAEB7207B123D0029E9E2 /* ATSearchForAccountsIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334BAEB6207B123D0029E9E2 /* ATSearchForAccountsIntentHandler.swift */; };
 		334BAEB9207B124A0029E9E2 /* BankAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334BAEB8207B124A0029E9E2 /* BankAccount.swift */; };
 		33AACFEE207C942A005D0FC0 /* AppIntentVocabulary.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33AACFEC207C942A005D0FC0 /* AppIntentVocabulary.plist */; };
+		33AACFF0207CB5EB005D0FC0 /* AppIntentVocabulary.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33AACFEC207C942A005D0FC0 /* AppIntentVocabulary.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -290,6 +291,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33AACFF0207CB5EB005D0FC0 /* AppIntentVocabulary.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
