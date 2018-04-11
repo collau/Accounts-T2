@@ -25,9 +25,7 @@ class ViewController: UIViewController {
             }
         }
         
-        let accounts = allAccounts()
-        let accountNames = accounts.map { $0.nickname!.spokenPhrase } // must be spokenPhrase
-        INVocabulary.shared().setVocabularyStrings(NSOrderedSet(array: accountNames), of: .paymentsAccountNickname)
+        registerVocabulary()
         
     }
 
@@ -48,8 +46,7 @@ class ViewController: UIViewController {
     
     public func registerVocabulary() {
         let accounts = allAccounts()
-        let accountNames = accounts.map { $0.nickname! }
-        print("\(accountNames)")
+        let accountNames = accounts.map { $0.nickname!.spokenPhrase }
         INVocabulary.shared().setVocabularyStrings(NSOrderedSet(array: accountNames), of: .paymentsAccountNickname)
     }
 }
