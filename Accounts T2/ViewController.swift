@@ -23,10 +23,12 @@ class ViewController: UIViewController {
             default:
                 print("Unauthorized")
             }
+            
         }
         
-        registerVocabulary()
+//        INVocabulary.shared().setVocabulary(["Joint Family", "JKK Investment", "BNM 123 Gold Card", "Last Resort"], of: .paymentsAccountNickname)
         
+        registerVocabulary()
     }
 
     override func didReceiveMemoryWarning() {
