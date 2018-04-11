@@ -48,50 +48,50 @@ class ATSearchForAccountsIntentHandler: NSObject, INSearchForAccountsIntentHandl
         }
             
                 
-        else if let orgName = intent.organizationName
-        {
-        var matchedAcct: INSpeakableString?
-            for account in accounts
-            {
-                if orgName.spokenPhrase.lowercased() == account.nickname?.spokenPhrase.lowercased()
-                {
-                    nickFound = true
-                    matchedAcct = account.nickname!
-                    break
-                }
-            }
-            if nickFound
-            {
-                result = INSpeakableStringResolutionResult.success(with: matchedAcct!)
-            }
-            else
-            {
-                var matchedNickwithType = [INSpeakableString]()
-                var matchedAccount = [INPaymentAccount]()
-                
-                let accountType = intent.accountType
-                for account in accounts {
-                    print("Checking accountType")
-                    if accountType == account.accountType {
-                        matchedAccount.append(account)
-                    }
-                }
-                
-                for account in matchedAccount
-                {
-                    matchedNickwithType.append(account.nickname!)
-                }
-                
-                switch matchedNickwithType.count {
-                case 1...Int.max:
-                    result = INSpeakableStringResolutionResult.disambiguation(with: matchedNickwithType)
-                case 0:
-                    result = INSpeakableStringResolutionResult.disambiguation(with: matchedNick)
-                default:
-                    return
-                }
-            }
-        }
+//        else if let orgName = intent.organizationName
+//        {
+//        var matchedAcct: INSpeakableString?
+//            for account in accounts
+//            {
+//                if orgName.spokenPhrase.lowercased() == account.nickname?.spokenPhrase.lowercased()
+//                {
+//                    nickFound = true
+//                    matchedAcct = account.nickname!
+//                    break
+//                }
+//            }
+//            if nickFound
+//            {
+//                result = INSpeakableStringResolutionResult.success(with: matchedAcct!)
+//            }
+//            else
+//            {
+//                var matchedNickwithType = [INSpeakableString]()
+//                var matchedAccount = [INPaymentAccount]()
+//
+//                let accountType = intent.accountType
+//                for account in accounts {
+//                    print("Checking accountType")
+//                    if accountType == account.accountType {
+//                        matchedAccount.append(account)
+//                    }
+//                }
+//
+//                for account in matchedAccount
+//                {
+//                    matchedNickwithType.append(account.nickname!)
+//                }
+//
+//                switch matchedNickwithType.count {
+//                case 1...Int.max:
+//                    result = INSpeakableStringResolutionResult.disambiguation(with: matchedNickwithType)
+//                case 0:
+//                    result = INSpeakableStringResolutionResult.disambiguation(with: matchedNick)
+//                default:
+//                    return
+//                }
+//            }
+//        }
             
         else
         {

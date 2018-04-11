@@ -26,9 +26,8 @@ class ViewController: UIViewController {
         }
         
         let accounts = allAccounts()
-        let accountNames = accounts.map { $0.nickname! }
-        INVocabulary.shared().setVocabulary(NSOrderedSet(array: accountNames), of: .paymentsAccountNickname)
-        
+        let accountNames = accounts.map { $0.nickname!.spokenPhrase } // must be spokenPhrase
+        INVocabulary.shared().setVocabularyStrings(NSOrderedSet(array: accountNames), of: .paymentsAccountNickname)
         
     }
 
@@ -39,10 +38,10 @@ class ViewController: UIViewController {
     
     public func allAccounts() -> [INPaymentAccount] {
         return [
-            INPaymentAccount(nickname: INSpeakableString(vocabularyIdentifier: "Frank", spokenPhrase: "Frank", pronunciationHint: "Frank"), number: "******789", accountType: .saving, organizationName: INSpeakableString(spokenPhrase: "AYZ"), balance: INBalanceAmount(amount: 4893.93, currencyCode: "USD"),secondaryBalance: nil),
+            INPaymentAccount(nickname: INSpeakableString(vocabularyIdentifier: "Joint Family", spokenPhrase: "Joint Family", pronunciationHint: "Joint Family"), number: "******789", accountType: .saving, organizationName: INSpeakableString(spokenPhrase: "AYZ"), balance: INBalanceAmount(amount: 4893.93, currencyCode: "USD"),secondaryBalance: nil),
             INPaymentAccount(nickname: INSpeakableString(vocabularyIdentifier: "JKK Investment", spokenPhrase: "JKK Investment", pronunciationHint: "jay kay kay investment"), number: "******321", accountType: .investment, organizationName: INSpeakableString(spokenPhrase: "AYZ"), balance: INBalanceAmount(amount: 1111.93, currencyCode: "GBP"),secondaryBalance: nil),
             INPaymentAccount(nickname: INSpeakableString(vocabularyIdentifier: "BNM 123 Gold Card", spokenPhrase: "BNM 123 Gold Card", pronunciationHint: "BNM 123 Gold Card"), number: "******482", accountType: .debit, organizationName: INSpeakableString(spokenPhrase: "AYZ"), balance: INBalanceAmount(amount: 88123.93, currencyCode: "KRW"),secondaryBalance: nil),
-            INPaymentAccount(nickname: INSpeakableString(vocabularyIdentifier: "Bobbie", spokenPhrase: "Bobbie", pronunciationHint: "Bobbie"), number: nil, accountType: .debit, organizationName: INSpeakableString(spokenPhrase: "AYZ"), balance: INBalanceAmount(amount: 1234.56, currencyCode: "SGD"),secondaryBalance: INBalanceAmount(amount: 2974, balanceType: .miles))
+            INPaymentAccount(nickname: INSpeakableString(spokenPhrase: "Last Resort"), number: nil, accountType: .debit, organizationName: INSpeakableString(spokenPhrase: "AYZ"), balance: INBalanceAmount(amount: 1234.56, currencyCode: "SGD"),secondaryBalance: INBalanceAmount(amount: 2974, balanceType: .miles))
         ]
     }
     
