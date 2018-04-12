@@ -15,6 +15,7 @@ class ATSearchForAccountsIntentHandler: NSObject, INSearchForAccountsIntentHandl
     
     func resolveAccountNickname(for intent: INSearchForAccountsIntent, with completion: @escaping (INSpeakableStringResolutionResult) -> Void) {
         
+         AuthController.authenticationWithTouchID()
 
         var nickFound = false
         var result: INSpeakableStringResolutionResult

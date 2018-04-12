@@ -11,6 +11,7 @@ import Intents
 import AccountEx
 
 class ViewController: UIViewController {
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,8 +24,9 @@ class ViewController: UIViewController {
             default:
                 print("Unauthorized")
             }
-            
         }
+        
+        
         registerVocabulary()
     }
 

@@ -25,7 +25,7 @@ class IntentHandler: INExtension {
         // you can override this and return the handler you want for that particular intent.
         
         if intent is INSearchForAccountsIntent {
-            AuthController.authenticationWithTouchID()
+            print("Intent chosen")
             return ATSearchForAccountsIntentHandler()
         }
         

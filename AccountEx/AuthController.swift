@@ -28,7 +28,6 @@ public class AuthController {
                         return
                     }
                     print(evaluateAuthenticationPolicyMessageForLA(errorCode: error._code))
-                    return
                 }
             })
         }
@@ -37,7 +36,6 @@ public class AuthController {
                 return
             }
             print(self.evaluateAuthenticationPolicyMessageForLA(errorCode: error.code))
-            return
         }
     }
     
