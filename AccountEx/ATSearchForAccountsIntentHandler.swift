@@ -126,9 +126,10 @@ class ATSearchForAccountsIntentHandler: NSObject, INSearchForAccountsIntentHandl
     func handle(intent: INSearchForAccountsIntent, completion: @escaping (INSearchForAccountsIntentResponse) -> Void) {
         
         print(intent)
+        var response = INSearchForAccountsIntentResponse(code: .failureRequiringAppLaunch, userActivity: nil)
         
         if let accountNickname = intent.accountNickname {
-            let response = INSearchForAccountsIntentResponse(code: .success, userActivity: nil)
+            response = INSearchForAccountsIntentResponse(code: .success, userActivity: nil)
             var matchedNick = [INPaymentAccount]()
             print("Handled Nickname: \(accountNickname)")
             
@@ -138,29 +139,14 @@ class ATSearchForAccountsIntentHandler: NSObject, INSearchForAccountsIntentHandl
                     matchedNick.append(account)
                 }
             }
-            
             response.accounts = matchedNick
-            completion(response)
         }
-//        else if let orgName = intent.organizationName {
-//            let response = INSearchForAccountsIntentResponse(code: .success, userActivity: nil)
-//            var matchedNick = [INPaymentAccount]()
-//
-//            for account in accounts {
-//                if orgName.spokenPhrase == account.organizationName?.spokenPhrase
-//                {
-//                    matchedNick.append(account)
-//                }
-//            }
-//            response.accounts = matchedNick
-//            completion(response)
-//        }
             
         else
         {
-            let response = INSearchForAccountsIntentResponse(code: .failureRequiringAppLaunch, userActivity: nil)
-            completion(response)
+            response = INSearchForAccountsIntentResponse(code: .failureRequiringAppLaunch, userActivity: nil)
         }
+        completion(response)
     }
 }
 
