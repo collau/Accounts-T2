@@ -14,6 +14,7 @@ class ATSearchForAccountsIntentHandler: NSObject, INSearchForAccountsIntentHandl
     let accounts = BankAccount.allAccounts()
     
     func resolveAccountNickname(for intent: INSearchForAccountsIntent, with completion: @escaping (INSpeakableStringResolutionResult) -> Void) {
+        
 
         var nickFound = false
         var result: INSpeakableStringResolutionResult

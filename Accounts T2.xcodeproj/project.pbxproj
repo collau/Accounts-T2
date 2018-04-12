@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		33338C1B207F36640053AF82 /* AuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33338C1A207F36640053AF82 /* AuthController.swift */; };
 		334BAE7F207B110A0029E9E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334BAE7E207B110A0029E9E2 /* AppDelegate.swift */; };
 		334BAE81207B110A0029E9E2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334BAE80207B110A0029E9E2 /* ViewController.swift */; };
 		334BAE84207B110A0029E9E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 334BAE82207B110A0029E9E2 /* Main.storyboard */; };
@@ -57,6 +58,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		33338C1A207F36640053AF82 /* AuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthController.swift; sourceTree = "<group>"; };
 		334BAE7B207B110A0029E9E2 /* Accounts T2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Accounts T2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		334BAE7E207B110A0029E9E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		334BAE80207B110A0029E9E2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				334BAE99207B11AE0029E9E2 /* Info.plist */,
 				334BAEB6207B123D0029E9E2 /* ATSearchForAccountsIntentHandler.swift */,
 				334BAEB8207B124A0029E9E2 /* BankAccount.swift */,
+				33338C1A207F36640053AF82 /* AuthController.swift */,
 			);
 			path = AccountEx;
 			sourceTree = "<group>";
@@ -320,6 +323,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				334BAE98207B11AE0029E9E2 /* IntentHandler.swift in Sources */,
+				33338C1B207F36640053AF82 /* AuthController.swift in Sources */,
 				334BAEB9207B124A0029E9E2 /* BankAccount.swift in Sources */,
 				334BAEB7207B123D0029E9E2 /* ATSearchForAccountsIntentHandler.swift in Sources */,
 			);
