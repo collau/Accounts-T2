@@ -12,10 +12,12 @@ import Intents
 class ATSearchForAccountsIntentHandler: NSObject, INSearchForAccountsIntentHandling {
     
     let accounts = BankAccount.allAccounts()
+    public var authenticatedStatus = false
     
     func resolveAccountNickname(for intent: INSearchForAccountsIntent, with completion: @escaping (INSpeakableStringResolutionResult) -> Void) {
         
-         AuthController.authenticationWithTouchID()
+        print("Authentication Step")
+        AuthController.authenticationWithTouchID()
 
         var nickFound = false
         var result: INSpeakableStringResolutionResult

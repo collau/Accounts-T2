@@ -21,12 +21,13 @@ public class AuthController {
             localAuthenticationContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reasonString, reply: { success, evaluateError in
                 
                 if success {
-                    
+                    // User authenticated successfully, take appropriate action
                 }
                 else {
                     guard let error = evaluateError else {
                         return
                     }
+                    // User did not authenticate successfully, look at error and take appropriate action
                     print(evaluateAuthenticationPolicyMessageForLA(errorCode: error._code))
                 }
             })
@@ -35,7 +36,23 @@ public class AuthController {
             guard let error = authError else {
                 return
             }
+            // Could not evaluate touchID policy; look at authError and present appropriate message to user
             print(self.evaluateAuthenticationPolicyMessageForLA(errorCode: error.code))
+            
+            // In this case, activate authentication using passcode
+            localAuthenticationContext.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reasonString, reply: {  success, evaluateError in
+                
+                if success {
+                    // Successful authentication using passcode
+                }
+                else {
+                    guard let error = evaluateError else {
+                        return
+                    }
+                    // Unsuccessful authentication using passcode
+                    print(evaluateAuthenticationPolicyMessageForLA(errorCode: error._code))
+                }
+            })
         }
     }
     
@@ -95,6 +112,7 @@ public class AuthController {
                 message = "The user did cancel"
                 
             case LAError.userFallback.rawValue:
+                // errorCode == -3
                 message = "The user chose to use the fallback"
                 
             default:
