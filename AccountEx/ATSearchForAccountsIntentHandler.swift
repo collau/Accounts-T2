@@ -12,19 +12,14 @@ import Intents
 class ATSearchForAccountsIntentHandler: NSObject, INSearchForAccountsIntentHandling {
     
     let accounts = BankAccount.allAccounts()
-    public var authenticatedStatus = false
     
     func resolveAccountNickname(for intent: INSearchForAccountsIntent, with completion: @escaping (INSpeakableStringResolutionResult) -> Void) {
         
         print("Authentication Step")
-        AuthController.authenticationWithTouchID()
+        // AuthController.authenticationWithTouchID()
 
         var nickFound = false
         var result: INSpeakableStringResolutionResult
-        var matchedNick = [INSpeakableString]()
-        for account in accounts {
-            matchedNick.append(account.nickname!)
-        }
 
         print("Intent Nickname: \(String(describing: intent.accountNickname))")
         print(intent)
@@ -47,7 +42,7 @@ class ATSearchForAccountsIntentHandler: NSObject, INSearchForAccountsIntentHandl
             }
             else
             {
-                result = INSpeakableStringResolutionResult.disambiguation(with: matchedNick)
+                result = INSpeakableStringResolutionResult.disambiguation(with: matchedNick())
             }
         }
             
@@ -119,7 +114,7 @@ class ATSearchForAccountsIntentHandler: NSObject, INSearchForAccountsIntentHandl
             case 1...Int.max:
                 result = INSpeakableStringResolutionResult.disambiguation(with: matchedNickwithType)
             case 0:
-                result = INSpeakableStringResolutionResult.disambiguation(with: matchedNick)
+                result = INSpeakableStringResolutionResult.disambiguation(with: matchedNick())
             default:
                 return
             }
@@ -134,16 +129,16 @@ class ATSearchForAccountsIntentHandler: NSObject, INSearchForAccountsIntentHandl
         
         if let accountNickname = intent.accountNickname {
             response = INSearchForAccountsIntentResponse(code: .success, userActivity: nil)
-            var matchedNick = [INPaymentAccount]()
+            var matchedAccount = [INPaymentAccount]()
             print("Handled Nickname: \(accountNickname)")
             
             for account in accounts {
                 if accountNickname.spokenPhrase.lowercased() == account.nickname?.spokenPhrase.lowercased()
                 {
-                    matchedNick.append(account)
+                    matchedAccount.append(account)
                 }
             }
-            response.accounts = matchedNick
+            response.accounts = matchedAccount
         }
             
         else
@@ -151,6 +146,14 @@ class ATSearchForAccountsIntentHandler: NSObject, INSearchForAccountsIntentHandl
             response = INSearchForAccountsIntentResponse(code: .failureRequiringAppLaunch, userActivity: nil)
         }
         completion(response)
+    }
+    
+    func matchedNick() -> [INSpeakableString] {
+        var matchedNick = [INSpeakableString]()
+        for account in accounts {
+            matchedNick.append(account.nickname!)
+        }
+        return matchedNick
     }
 }
 

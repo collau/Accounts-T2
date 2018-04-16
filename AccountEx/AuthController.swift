@@ -18,7 +18,7 @@ public class AuthController {
         let reasonString = "To access sensitive data"
         
         if localAuthenticationContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &authError) {
-            localAuthenticationContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reasonString, reply: { success, evaluateError in
+            localAuthenticationContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reasonString, reply: { (success, evaluateError) in
                 
                 if success {
                     // User authenticated successfully, take appropriate action
