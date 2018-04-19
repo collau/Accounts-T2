@@ -19,26 +19,13 @@ import LocalAuthentication
 // "Search for messages in <myApp>"
 
 class IntentHandler: INExtension {
-    let accountSearchHandler = ATSearchForAccountsIntentHandler()
-    public var authenticatedStatus = false
+    
     override func handler(for intent: INIntent) -> Any? {
         // This is the default implementation.  If you want different objects to handle different intents,
         // you can override this and return the handler you want for that particular intent.
         
         if intent is INSearchForAccountsIntent {
-            print("Intent chosen")
-            print(self)
-            print(authenticatedStatus)
-            
-            // if authenticatedStatus is false, touchID. if authenticated status is true, run intentHandler
-            if !authenticatedStatus {
-                print("run authentication")
-                authenticatedStatus = true
-            }
-            else {
-                print("already true")
-            }
-            return accountSearchHandler
+            return ATSearchForAccountsIntentHandler()
         }
         return nil
     }
