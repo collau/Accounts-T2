@@ -22,6 +22,7 @@
 		334BAEAE207B11AE0029E9E2 /* AccountEx.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 334BAE95207B11AE0029E9E2 /* AccountEx.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		334BAEB7207B123D0029E9E2 /* ATSearchForAccountsIntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334BAEB6207B123D0029E9E2 /* ATSearchForAccountsIntentHandler.swift */; };
 		334BAEB9207B124A0029E9E2 /* BankAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334BAEB8207B124A0029E9E2 /* BankAccount.swift */; };
+		338AE1072088993D0053B021 /* ATSearchForAccountsIntentHandler2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338AE1062088993D0053B021 /* ATSearchForAccountsIntentHandler2.swift */; };
 		33AACFEE207C942A005D0FC0 /* AppIntentVocabulary.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33AACFEC207C942A005D0FC0 /* AppIntentVocabulary.plist */; };
 		33AACFF0207CB5EB005D0FC0 /* AppIntentVocabulary.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33AACFEC207C942A005D0FC0 /* AppIntentVocabulary.plist */; };
 /* End PBXBuildFile section */
@@ -79,6 +80,7 @@
 		334BAEA8207B11AE0029E9E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		334BAEB6207B123D0029E9E2 /* ATSearchForAccountsIntentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATSearchForAccountsIntentHandler.swift; sourceTree = "<group>"; };
 		334BAEB8207B124A0029E9E2 /* BankAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankAccount.swift; sourceTree = "<group>"; };
+		338AE1062088993D0053B021 /* ATSearchForAccountsIntentHandler2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ATSearchForAccountsIntentHandler2.swift; sourceTree = "<group>"; };
 		33AACFED207C942A005D0FC0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = "Accounts T2/Base.lproj/AppIntentVocabulary.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -149,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				334BAE97207B11AE0029E9E2 /* IntentHandler.swift */,
+				338AE1062088993D0053B021 /* ATSearchForAccountsIntentHandler2.swift */,
 				334BAE99207B11AE0029E9E2 /* Info.plist */,
 				334BAEB6207B123D0029E9E2 /* ATSearchForAccountsIntentHandler.swift */,
 				334BAEB8207B124A0029E9E2 /* BankAccount.swift */,
@@ -329,6 +332,7 @@
 				334BAE98207B11AE0029E9E2 /* IntentHandler.swift in Sources */,
 				33338C1B207F36640053AF82 /* AuthController.swift in Sources */,
 				334BAEB9207B124A0029E9E2 /* BankAccount.swift in Sources */,
+				338AE1072088993D0053B021 /* ATSearchForAccountsIntentHandler2.swift in Sources */,
 				334BAEB7207B123D0029E9E2 /* ATSearchForAccountsIntentHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

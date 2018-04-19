@@ -13,124 +13,102 @@ import LocalAuthentication
 class ATSearchForAccountsIntentHandler: NSObject, INSearchForAccountsIntentHandling {
     
     let accounts = BankAccount.allAccounts()
-    public var authenticatedStatus = false
     
     func resolveAccountNickname(for intent: INSearchForAccountsIntent, with completion: @escaping (INSpeakableStringResolutionResult) -> Void) {
         
-//        let authenticationBlock: (Bool) -> () = { authStatus in
-//            if authStatus {
-//                print(authStatus)
-//                print("continue process")
-//            }
-//            else if !authStatus
-//            {
-//                print(authStatus)
-//                print("stop everything")
-//            }
-//        }
-//
-//        func authen(doneAuthenBlock: (Bool) -> ()) {
-//            doneAuthenBlock(AuthController.authenticationWithTouchID())
-//        }
-//
-//        authen(doneAuthenBlock: authenticationBlock)
-        
-//        if !authenticatedStatus {
-//            print("run authentication")
-//            if AuthController.authenticationWithTouchID() {
-//                authenticatedStatus = true
-//            }
-//            else {
-//                print("error authen")
-//            }
-//            // authenticatedStatus = AuthController.authenticationWithTouchID()
-//            print(authenticatedStatus)
-//        }
-//        else {
-//            print("already true")
-//        }
+        print("Intent is: " + "\(intent)")
+        print(authStatus)
 
-        if !authenticatedStatus {
+        if !authStatus {
             let localAuthenticationContext = LAContext()
-            localAuthenticationContext.localizedFallbackTitle = "Use Passcode"
+            localAuthenticationContext.localizedFallbackTitle = "" // set to empty string if fallback option is not needed
             
             var authError: NSError?
             let reasonString = "To access sensitive data"
-            
-            if localAuthenticationContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &authError) {
-                localAuthenticationContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reasonString, reply: {(success, evaluateError) in
+            let x = {(success :Bool, evaluateError:Error?) -> Void in
+                var result: INSpeakableStringResolutionResult
+                
+                if success {
+                    authStatus = true
+                    var nickFound = false
                     
-                    if success {
-                        self.authenticatedStatus = true
-                        var nickFound = false
-                        var result: INSpeakableStringResolutionResult
-                        
-                        print("Intent Nickname: \(String(describing: intent.accountNickname))")
-                        print(intent)
-                        if let accountNickname = intent.accountNickname
+                    print("Intent Nickname: \(String(describing: intent.accountNickname))")
+                    print(intent)
+                    if let accountNickname = intent.accountNickname
+                    {
+                        print("\(accountNickname)")
+                        for account in self.accounts
                         {
-                            print("\(accountNickname)")
-                            for account in self.accounts
+                            print("\(account.nickname!)")
+                            if accountNickname.spokenPhrase.lowercased() == account.nickname?.spokenPhrase.lowercased()
                             {
-                                print("\(account.nickname!)")
-                                if accountNickname.spokenPhrase.lowercased() == account.nickname?.spokenPhrase.lowercased()
-                                {
-                                    nickFound = true
-                                    break
-                                }
+                                nickFound = true
+                                break
                             }
-                            
-                            if nickFound
-                            {
-                                result = INSpeakableStringResolutionResult.success(with: intent.accountNickname!)
-                            }
-                            else
-                            {
-                                result = INSpeakableStringResolutionResult.disambiguation(with: self.matchedNick())
-                            }
+                        }
+                        
+                        if nickFound
+                        {
+                            result = INSpeakableStringResolutionResult.success(with: intent.accountNickname!)
                         }
                         else
                         {
-                            var matchedNickwithType = [INSpeakableString]()
-                            var matchedAccount = [INPaymentAccount]()
-                            
-                            let accountType = intent.accountType
-                            for account in self.accounts {
-                                print("Checking accountType")
-                                if accountType == account.accountType {
-                                    matchedAccount.append(account)
-                                }
-                            }
-                            
-                            for account in matchedAccount
-                            {
-                                matchedNickwithType.append(account.nickname!)
-                            }
-                            
-                            switch matchedNickwithType.count {
-                            case 1...Int.max:
-                                result = INSpeakableStringResolutionResult.disambiguation(with: matchedNickwithType)
-                            case 0:
-                                result = INSpeakableStringResolutionResult.disambiguation(with: self.matchedNick())
-                            default:
-                                return
+                            result = INSpeakableStringResolutionResult.disambiguation(with: self.matchedNick())
+                        }
+                    }
+                    else
+                    {
+                        var matchedNickwithType = [INSpeakableString]()
+                        var matchedAccount = [INPaymentAccount]()
+                        
+                        let accountType = intent.accountType
+                        for account in self.accounts {
+                            print("Checking accountType")
+                            if accountType == account.accountType {
+                                matchedAccount.append(account)
                             }
                         }
-                        completion(result)
                         
-                    }
-                    else {
-                        guard let error = evaluateError else {
+                        for account in matchedAccount
+                        {
+                            matchedNickwithType.append(account.nickname!)
+                        }
+                        
+                        switch matchedNickwithType.count {
+                        case 1...Int.max:
+                            result = INSpeakableStringResolutionResult.disambiguation(with: matchedNickwithType)
+                        case 0:
+                            result = INSpeakableStringResolutionResult.disambiguation(with: self.matchedNick())
+                        default:
                             return
                         }
-                        print(AuthController.evaluateAuthenticationPolicyMessageForLA(errorCode: error._code))
                     }
+                    completion(result)
+                    
+                }
+                else {
+                    guard let error = evaluateError else {
+                        return
+                    }
+                    print("if success")
+                    print(AuthController.evaluateAuthenticationPolicyMessageForLA(errorCode: error._code))
+                    
+                    result = INSpeakableStringResolutionResult.notRequired()
+                    completion(result)
+                    //TODO: Insert closure here
+                }
+            }
+            if localAuthenticationContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &authError) {
+                localAuthenticationContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reasonString, reply: {(success, evaluateError) in
+                    
+                    x(success, evaluateError);
                 })
             }
             else {
                 guard let error = authError else {
                     return
                 }
+                print("if cannot evaluate")
                 print(AuthController.evaluateAuthenticationPolicyMessageForLA(errorCode: error.code))
             }
         }
@@ -259,8 +237,10 @@ class ATSearchForAccountsIntentHandler: NSObject, INSearchForAccountsIntentHandl
         print("handle")
         print(intent)
         var response = INSearchForAccountsIntentResponse(code: .failureRequiringAppLaunch, userActivity: nil)
+        authStatus = false
         
         if let accountNickname = intent.accountNickname {
+            // response = INSearchForAccountsIntentResponse(code: .failureCredentialsUnverified, userActivity: nil)
             response = INSearchForAccountsIntentResponse(code: .success, userActivity: nil)
             var matchedAccount = [INPaymentAccount]()
             print("Handled Nickname: \(accountNickname)")
@@ -276,7 +256,7 @@ class ATSearchForAccountsIntentHandler: NSObject, INSearchForAccountsIntentHandl
             
         else
         {
-            response = INSearchForAccountsIntentResponse(code: .failureRequiringAppLaunch, userActivity: nil)
+            response = INSearchForAccountsIntentResponse(code: .failureCredentialsUnverified, userActivity: nil)
         }
         completion(response)
     }
@@ -288,4 +268,5 @@ class ATSearchForAccountsIntentHandler: NSObject, INSearchForAccountsIntentHandl
         }
         return matchedNick
     }
+    
 }
