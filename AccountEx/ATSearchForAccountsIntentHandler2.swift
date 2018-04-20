@@ -10,70 +10,95 @@ import Foundation
 import Intents
 import LocalAuthentication
 
+
 class ATSearchForAccountsIntentHandler2: NSObject, INSearchForAccountsIntentHandling {
     
     let accounts = BankAccount.allAccounts()
     var obtainedNickname: INSpeakableString?
     var obtainedAccountType: INAccountType?
+    var result: INSpeakableStringResolutionResult?
+    
+//    let z = {(success :Bool, evaluateError: Error?) -> Void in
+//        if success {
+//            authStatus = true;
+//            print("from method z")
+//        }
+//        else {
+//            guard let error = evaluateError else {
+//                return
+//            }
+//            authStatus = false
+//            // completion(INSpeakableStringResolutionResult.notRequired())
+//        }
+//    }
+
+    
+    
+    
     
     func resolveAccountNickname(for intent: INSearchForAccountsIntent, with completion: @escaping (INSpeakableStringResolutionResult) -> Void) {
         
         print("Intent is: " + "\(intent)")
-        print(authStatus)
+        print("\(authStatus) from resolveAccountNickname")
         obtainedNickname = intent.accountNickname
         obtainedAccountType = intent.accountType
         
-        if !authStatus {
-            let localAuthenticationContext = LAContext()
-            localAuthenticationContext.localizedFallbackTitle = "" // set to empty string if fallback option is not needed
-            
-            var authError: NSError?
-            let reasonString = "To access sensitive data"
-            let x = {(success :Bool, evaluateError:Error?) -> Void in
-                var result: INSpeakableStringResolutionResult
-                
-                if success {
-                    authStatus = true;
-                    completion(self.proceedResolve())
-                    
-                }
-                else {
-                    guard let error = evaluateError else {
-                        return
-                    }
-                    print("if success")
-                    print(AuthController.evaluateAuthenticationPolicyMessageForLA(errorCode: error._code))
-                    
-                    result = INSpeakableStringResolutionResult.notRequired()
-                    completion(result)
-                    //TODO: Insert closure here
-                }
-            }
-            
-            
-            
-            
-            
-            
-            if localAuthenticationContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &authError) {
-                localAuthenticationContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reasonString, reply: {(success, evaluateError) in
-                    
-                    x(success, evaluateError);
-                })
+    
+        
+        
+        // Closure
+        let x = {(success :Bool, evaluateError:Error?) -> Void in
+
+            if success {
+                authStatus = true;
+                completion(self.proceedResolve())
+
             }
             else {
-                guard let error = authError else {
+                guard let error = evaluateError else {
                     return
                 }
-                print("if cannot evaluate")
-                print(AuthController.evaluateAuthenticationPolicyMessageForLA(errorCode: error.code))
+                print("if yes biometrics")
+                print(AuthController.evaluateAuthenticationPolicyMessageForLA(errorCode: error._code))
+                completion(INSpeakableStringResolutionResult.notRequired())
             }
+        }
+        
+        
+        
+        
+        
+        
+        
+        if !authStatus {
+            AuthController.authenticationWithTouchID(callback: x)
+            
+//            let localAuthenticationContext = LAContext()
+//            localAuthenticationContext.localizedFallbackTitle = "" // set to empty string if fallback option is not needed
+//            var authError: NSError?
+//            let reasonString = "To access sensitive data"
+//
+//            if localAuthenticationContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &authError) {
+//                localAuthenticationContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reasonString, reply: {(success, evaluateError) in
+//
+//                    x(success, evaluateError);
+//                })
+//            }
+//            else {
+//                guard let error = authError else {
+//                    return
+//                }
+//                print("if no biometrics")
+//                print(AuthController.evaluateAuthenticationPolicyMessageForLA(errorCode: error.code))
+//                completion(INSpeakableStringResolutionResult.notRequired())
+//            }
         }
         else
         {
             print("function works?!")
-            completion(proceedResolve())
+             completion(proceedResolve())
         }
+//        completion(proceedResolve())
     }
     
     func handle(intent: INSearchForAccountsIntent, completion: @escaping (INSearchForAccountsIntentResponse) -> Void) {
@@ -169,5 +194,4 @@ class ATSearchForAccountsIntentHandler2: NSObject, INSearchForAccountsIntentHand
         }
         return result
     }
-    
 }

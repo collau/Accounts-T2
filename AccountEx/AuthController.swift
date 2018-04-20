@@ -11,31 +11,41 @@ import LocalAuthentication
 
 public class AuthController {
     
-    public class func authenticationWithTouchID() {
+    
+    
+    public class func authenticationWithTouchID(callback: @escaping (Bool, Error?) -> Void) {
         let localAuthenticationContext = LAContext()
         localAuthenticationContext.localizedFallbackTitle = "Use Passcode"
-        
         var authError: NSError?
         let reasonString = "To access sensitive data"
         
-        if localAuthenticationContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &authError) {
+        if localAuthenticationContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &authError)
+            // is it possible to authenticate with biometric? yes
+        
+        {
             localAuthenticationContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reasonString, reply: {(success, evaluateError) in
                 
-                if success {
-                    // User authenticated successfully, take appropriate action
-                    print("touchID OK")
-                }
-                else {
-                    guard let error = evaluateError else {
-                        return
-                        
-                    }
-                    // User did not authenticate successfully, look at error and take appropriate action
-                    print(evaluateAuthenticationPolicyMessageForLA(errorCode: error._code))
-                    }
+//                ATSearchForAccountsIntentHandler2().z(success, evaluateError)
+                callback(success, evaluateError)
+                print("auth success! status is now \(authStatus)")
+                
+//                if success {
+//                    // User authenticated successfully, take appropriate action
+//                    print("touchID OK")
+//                }
+//                else {
+//                    guard let error = evaluateError else {
+//                        return
+//
+//                    }
+//                    // User did not authenticate successfully, look at error and take appropriate action
+//                    print(evaluateAuthenticationPolicyMessageForLA(errorCode: error._code))
+//
+//                }
             })
-            print("why is this being called first?")
-            }
+        }
+            
+            
         else
         {
             guard let error = authError else {
@@ -65,7 +75,10 @@ public class AuthController {
 //                }
 //            })
 //        }
+    
+
     }
+    
     
     public class func evaluatePolicyFailErrorMessageForLA(errorCode: Int) -> String {
         var message = ""

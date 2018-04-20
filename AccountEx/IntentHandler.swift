@@ -39,7 +39,7 @@ class IntentHandler: INExtension {
                 authStatus = false
             }
             print(self.hash)
-            print(authStatus)
+            print("\(authStatus) from IntentHandler class")
             intentSession = self.hash
             return accountSearchHandler
         }
