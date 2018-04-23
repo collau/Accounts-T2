@@ -28,7 +28,7 @@ class IntentHandler: INExtension {
         // This is the default implementation.  If you want different objects to handle different intents,
         // you can override this and return the handler you want for that particular intent.
         
-        let accountSearchHandler = ATSearchForAccountsIntentHandler2()
+        let accountSearchHandler = ATSearchForAccountsIntentHandler()
         
         if intent is INSearchForAccountsIntent {
             if (self.hash == intentSession) {
@@ -38,8 +38,6 @@ class IntentHandler: INExtension {
             {
                 authStatus = false
             }
-            print(self.hash)
-            print("\(authStatus) from IntentHandler class")
             intentSession = self.hash
             return accountSearchHandler
         }

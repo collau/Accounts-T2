@@ -51,6 +51,7 @@ class ATSearchForAccountsIntentHandler2: NSObject, INSearchForAccountsIntentHand
 
             if success {
                 authStatus = true;
+                print("x, success")
                 completion(self.proceedResolve())
 
             }
@@ -71,7 +72,14 @@ class ATSearchForAccountsIntentHandler2: NSObject, INSearchForAccountsIntentHand
         
         
         if !authStatus {
-            AuthController.authenticationWithTouchID(callback: x)
+            if LAContext().canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) {
+                AuthController.authenticationWithTouchID(callback: x)
+            }
+            else
+            {
+                completion(INSpeakableStringResolutionResult.notRequired())
+            }
+            
             
 //            let localAuthenticationContext = LAContext()
 //            localAuthenticationContext.localizedFallbackTitle = "" // set to empty string if fallback option is not needed

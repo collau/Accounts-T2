@@ -15,17 +15,16 @@ public class AuthController {
     
     public class func authenticationWithTouchID(callback: @escaping (Bool, Error?) -> Void) {
         let localAuthenticationContext = LAContext()
-        localAuthenticationContext.localizedFallbackTitle = "Use Passcode"
-        var authError: NSError?
+        localAuthenticationContext.localizedFallbackTitle = ""
+//        var authError: NSError?
         let reasonString = "To access sensitive data"
         
-        if localAuthenticationContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &authError)
-            // is it possible to authenticate with biometric? yes
-        
-        {
+//        if localAuthenticationContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &authError)
+//
+//            // is it possible to authenticate with biometric? yes
+//        {
             localAuthenticationContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reasonString, reply: {(success, evaluateError) in
                 
-//                ATSearchForAccountsIntentHandler2().z(success, evaluateError)
                 callback(success, evaluateError)
                 print("auth success! status is now \(authStatus)")
                 
@@ -46,13 +45,19 @@ public class AuthController {
         }
             
             
-        else
-        {
-            guard let error = authError else {
-                return
-            }
-            print(evaluateAuthenticationPolicyMessageForLA(errorCode: error.code))
-        }
+//        else
+//            // not possible to authenticate with biometric
+//        {
+//            guard let error = authError else {
+//                return
+//            }
+//            print(evaluateAuthenticationPolicyMessageForLA(errorCode: error.code))
+//        }
+    
+    
+    
+    
+    
 //        else {
 //            guard let error = authError else {
 //                return
@@ -77,7 +82,7 @@ public class AuthController {
 //        }
     
 
-    }
+    
     
     
     public class func evaluatePolicyFailErrorMessageForLA(errorCode: Int) -> String {

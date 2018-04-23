@@ -26,7 +26,11 @@ class ViewController: UIViewController {
             }
         }
         
-        registerVocabulary()
+//        let accounts = allAccounts()
+//        let accountNames = accounts.map { $0.nickname!.spokenPhrase }
+//        INVocabulary.shared().setVocabulary(NSOrderedSet(array: accountNames), of: .paymentsAccountNickname)
+        
+         registerVocabulary()
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,6 +52,7 @@ class ViewController: UIViewController {
         let accounts = allAccounts()
         let accountNames = accounts.map { $0.nickname!.spokenPhrase }
         INVocabulary.shared().setVocabularyStrings(NSOrderedSet(array: accountNames), of: .paymentsAccountNickname)
+        print("vocabulary registered")
     }
 }
 
