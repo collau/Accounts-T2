@@ -28,9 +28,11 @@ class IntentHandler: INExtension {
         // This is the default implementation.  If you want different objects to handle different intents,
         // you can override this and return the handler you want for that particular intent.
         
+        // ATSearchForAccountsIntentHandler2 is a unclean version for further development
         let accountSearchHandler = ATSearchForAccountsIntentHandler()
         
         if intent is INSearchForAccountsIntent {
+            // if the intentSession is similar to previous, the session has been authenticated before
             if (self.hash == intentSession) {
                 authStatus = true
             }
@@ -38,6 +40,8 @@ class IntentHandler: INExtension {
             {
                 authStatus = false
             }
+            
+            // to set the hash value of the intent session for every Siri conversation
             intentSession = self.hash
             return accountSearchHandler
         }

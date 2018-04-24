@@ -86,11 +86,13 @@ class ATSearchForAccountsIntentHandler: NSObject, INSearchForAccountsIntentHandl
             
         else
         {
+            // re-route to app if intent.accountNickname is invalid
             response = INSearchForAccountsIntentResponse(code: .failureCredentialsUnverified, userActivity: nil)
         }
         completion(response)
     }
     
+    // create array of nicknames for disambiguation purposes
     func matchedNick() -> [INSpeakableString] {
         var matchedNick = [INSpeakableString]()
         for account in accounts {
@@ -99,6 +101,7 @@ class ATSearchForAccountsIntentHandler: NSObject, INSearchForAccountsIntentHandl
         return matchedNick
     }
     
+    // resolving the intent parameters, eventually narrowing down to one account nickname
     func proceedResolve() -> INSpeakableStringResolutionResult {
         var nickFound = false
         var result: INSpeakableStringResolutionResult
