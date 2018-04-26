@@ -11,79 +11,20 @@ import LocalAuthentication
 
 public class AuthController {
     
-    
-    
+    // only if TouchID is available - availability determined in ATSearchForAccountsIntentHandler
     public class func authenticationWithTouchID(callback: @escaping (Bool, Error?) -> Void) {
         let localAuthenticationContext = LAContext()
         localAuthenticationContext.localizedFallbackTitle = ""
-//        var authError: NSError?
         let reasonString = "To access sensitive data"
         
-//        if localAuthenticationContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &authError)
-//
-//            // is it possible to authenticate with biometric? yes
-//        {
             localAuthenticationContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reasonString, reply: {(success, evaluateError) in
                 
                 callback(success, evaluateError)
                 print("auth success! status is now \(authStatus)")
                 
-//                if success {
-//                    // User authenticated successfully, take appropriate action
-//                    print("touchID OK")
-//                }
-//                else {
-//                    guard let error = evaluateError else {
-//                        return
-//
-//                    }
-//                    // User did not authenticate successfully, look at error and take appropriate action
-//                    print(evaluateAuthenticationPolicyMessageForLA(errorCode: error._code))
-//
-//                }
             })
         }
-            
-            
-//        else
-//            // not possible to authenticate with biometric
-//        {
-//            guard let error = authError else {
-//                return
-//            }
-//            print(evaluateAuthenticationPolicyMessageForLA(errorCode: error.code))
-//        }
-    
-    
-    
-    
-    
-//        else {
-//            guard let error = authError else {
-//                return
-//            }
-//            // Could not evaluate touchID policy; look at authError and present appropriate message to user
-//            print(self.evaluateAuthenticationPolicyMessageForLA(errorCode: error.code))
-//
-//            // In this case, activate authentication using passcode
-//            localAuthenticationContext.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reasonString, reply: {  success, evaluateError in
-//
-//                if success {
-//                    // Successful authentication using passcode
-//                }
-//                else {
-//                    guard let error = evaluateError else {
-//                        return
-//                    }
-//                    // Unsuccessful authentication using passcode
-//                    print(evaluateAuthenticationPolicyMessageForLA(errorCode: error._code))
-//                }
-//            })
-//        }
-    
 
-    
-    
     
     public class func evaluatePolicyFailErrorMessageForLA(errorCode: Int) -> String {
         var message = ""
